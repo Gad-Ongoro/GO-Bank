@@ -9,6 +9,7 @@ django-rest-framework = "*"
 djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
+uuid = "*"
 
 [dev-packages]
 
