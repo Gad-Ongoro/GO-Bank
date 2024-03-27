@@ -39,8 +39,8 @@ class Address(models.Model):
     zipcode = models.CharField(max_length = 50)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     
-class Benefeiciary(models.Model):
-    benefeiciary_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
+class Beneficiary(models.Model):
+    beneficiary_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
     name = models.CharField(max_length = 100)
     account_number = models.IntegerField()
     relation = models.CharField(max_length = 100)
@@ -56,7 +56,7 @@ class Bank_Account(models.Model):
     balance = models.DecimalField(max_digits=20, decimal_places=2)
     loan_limit = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    benefeiciary = models.ForeignKey(Benefeiciary, on_delete = models.CASCADE)
+    beneficiary = models.ForeignKey(Beneficiary, on_delete = models.CASCADE)
     
 class Transaction(models.Model):
     transaction_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
@@ -66,7 +66,7 @@ class Transaction(models.Model):
     time_stamp = models.DateTimeField(auto_now_add = True)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     bank_account = models.ForeignKey(Bank_Account, on_delete = models.CASCADE)
-    beneficiary = models.ForeignKey(Benefeiciary, on_delete = models.CASCADE)
+    beneficiary = models.ForeignKey(Beneficiary, on_delete = models.CASCADE)
 
 class Card(models.Model):
     card_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
