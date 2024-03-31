@@ -20,7 +20,7 @@ class Profile(models.Model):
     last_name = models.CharField(max_length = 50)
     date_of_birth = models.DateField()
     gender = models.CharField(max_length = 50)
-    phone_number = models.IntegerField()
+    phone_number = models.CharField(max_length = 50)
     backup_mail = models.EmailField(unique = True)
     ID_type = models.CharField(max_length = 100)
     ID_number = models.IntegerField()
@@ -38,17 +38,18 @@ class Address(models.Model):
     state = models.CharField(max_length = 100)
     zipcode = models.CharField(max_length = 50)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
-    
+
 class Beneficiary(models.Model):
     beneficiary_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
     name = models.CharField(max_length = 100)
     account_number = models.IntegerField()
     relation = models.CharField(max_length = 100)
     email = models.EmailField(unique = True)
-    
+    user = models.ForeignKey(User, on_delete = models.CASCADE, default = None)
+
     def __str__(self):
         return f'{self.name} {self.email}'
-    
+
 class Bank_Account(models.Model):
     account_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
     account_type = models.CharField(max_length = 50)
@@ -57,7 +58,7 @@ class Bank_Account(models.Model):
     loan_limit = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     beneficiary = models.ForeignKey(Beneficiary, on_delete = models.CASCADE)
-    
+
 class Transaction(models.Model):
     transaction_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
     type = models.CharField(max_length = 50)
@@ -76,7 +77,7 @@ class Card(models.Model):
     date_issued = models.DateField()
     expiration_date = models.DateField()
     user = models.ForeignKey(User, on_delete = models.CASCADE)
-    
+  
 class Loan(models.Model):
     loan_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
     loan_type = models.CharField(max_length = 50)
