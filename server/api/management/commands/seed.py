@@ -72,5 +72,14 @@ class Command(BaseCommand):
                                     user = user
                                     )
             user_instance.save()
+        # Bank_Account
+        for user in models.User.Objects.all():
+            bank_account_instance = models.Bank_Account(
+                account_type = rc(['Personal', 'Corporate']),
+                account_number = fake.credit_card_number(),
+                balance = ri(100, 10000000),
+                loan_limit = ri(1000, 1000000),
+                user = user
+            )
 
         self.stdout.write(self.style.SUCCESS(f'Successfully seeded {num_records} records'))
