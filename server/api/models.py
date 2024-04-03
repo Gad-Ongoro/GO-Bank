@@ -1,5 +1,12 @@
 from django.db import models
 import uuid
+import django
+
+from datetime import datetime, timedelta
+import pytz
+
+EA_timezone = pytz.timezone('Africa/Nairobi')
+current_datetime = datetime.now(EA_timezone)
 
 # Create your models here.
 class User(models.Model):
@@ -45,7 +52,6 @@ class Beneficiary(models.Model):
     account_number = models.IntegerField()
     relation = models.CharField(max_length = 100)
     email = models.EmailField(unique = True)
-    user = models.ForeignKey(User, on_delete = models.CASCADE, default = None)
 
     def __str__(self):
         return f'{self.name} {self.email}'
@@ -57,7 +63,19 @@ class Bank_Account(models.Model):
     balance = models.DecimalField(max_digits=20, decimal_places=2)
     loan_limit = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    beneficiary = models.ForeignKey(Beneficiary, on_delete = models.CASCADE)
+    
+class Card(models.Model):
+    issue_date = current_datetime.strftime('%m/%y')
+    expiry_date = current_datetime + timedelta(days=365 * 4)
+    exp_date = expiry_date.strftime('%m/%y')
+
+    card_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
+    type = models.CharField(max_length = 50)
+    card_number = models.IntegerField(unique = True)
+    CVV = models.IntegerField()
+    date_issued = models.CharField(max_length = 50, default = issue_date)
+    expiration_date = models.CharField(max_length = 50, default = exp_date)
+    bank_account = models.ForeignKey(Bank_Account, on_delete = models.CASCADE, default = None)
 
 class Transaction(models.Model):
     transaction_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
@@ -65,30 +83,20 @@ class Transaction(models.Model):
     amount = models.IntegerField()
     description = models.CharField(max_length = 200)
     time_stamp = models.DateTimeField(auto_now_add = True)
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
     bank_account = models.ForeignKey(Bank_Account, on_delete = models.CASCADE)
     beneficiary = models.ForeignKey(Beneficiary, on_delete = models.CASCADE)
 
-class Card(models.Model):
-    card_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
-    type = models.CharField(max_length = 50)
-    card_number = models.IntegerField(unique = True)
-    CVV = models.IntegerField()
-    date_issued = models.DateField()
-    expiration_date = models.DateField()
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
-  
 class Loan(models.Model):
     loan_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
     loan_type = models.CharField(max_length = 50)
     amount = models.IntegerField()
     interest_rate = models.DecimalField(max_digits=5, decimal_places=2)
-    duration = models.IntegerField()
+    duration = models.PositiveIntegerField(help_text="Loan period in months")
     collateral = models.CharField(max_length = 200)
     status = models.BooleanField(default = False)
-    start_date = models.DateTimeField(auto_now_add = True)
+    start_date = models.DateField(default = django.utils.timezone.now)
     due_date = models.DateField()
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    bank_account = models.ForeignKey(Bank_Account, on_delete = models.CASCADE, default = None)
 
 class Loan_Payment(models.Model):
     loan_payment_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)

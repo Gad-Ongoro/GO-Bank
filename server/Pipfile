@@ -13,6 +13,8 @@ uuid = "*"
 faker = "*"
 django-seed = "*"
 psycopg2 = "*"
+datetime = "*"
+pytz = "*"
 
 [dev-packages]
 

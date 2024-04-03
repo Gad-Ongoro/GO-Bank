@@ -1,7 +1,10 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, status
+from rest_framework.response import Response
 from . import models
 from . import serializers
+from datetime import datetime, timedelta
+from django.urls import reverse_lazy
 
 # Create your views here.
 """ USERS """
@@ -68,9 +71,25 @@ class Card_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.CardSerializer
 
 """ LOANS """
-class Loan_ListCreateAPIView(generics.ListCreateAPIView):
+class Loan_ListAPIView(generics.ListAPIView):
     queryset = models.Loan.objects.all()
     serializer_class = serializers.LoanSerializer
+
+class Loan_CreateAPIView(generics.CreateAPIView):
+    serializer_class = serializers.LoanSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            loan = serializer.save()
+            loan.due_date = loan.start_date + timedelta(days=30 * loan.duration)
+            loan.save()
+            
+            # Return success response with created object data
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class Loan_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Loan.objects.all()

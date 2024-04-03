@@ -31,7 +31,8 @@ urlpatterns = [
     path('card/<uuid:pk>/', views.Card_Detail_APIView.as_view(), name='card_detail'),
 
     # Loan
-    path('loans/', views.Loan_ListCreateAPIView.as_view(), name="loan_list"),
+    path('loans/', views.Loan_ListAPIView.as_view(), name="loan_list"),
+    path('new_loans/', views.Loan_CreateAPIView.as_view(), name="new_loan"),
     path('loan/<uuid:pk>/', views.Loan_Detail_APIView.as_view(), name='loan_detail'),
     
     # Loan_Payment

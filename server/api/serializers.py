@@ -25,27 +25,25 @@ class BeneficiarySerializer(serializers.ModelSerializer):
         
 class BankAccountSerializer(serializers.ModelSerializer):
     # user = UserSerializer()
-    # beneficiary = BeneficiarySerializer()
     class Meta:
         model = models.Bank_Account
         fields = '__all__'
         
 class TransactionSerializer(serializers.ModelSerializer):
-    # user = UserSerializer()
-    # bank_account = BankAccountSerializer()
+    bank_account = BankAccountSerializer()
     # beneficiary = BeneficiarySerializer()
     class Meta:
         model = models.Transaction
         fields = '__all__'
         
 class CardSerializer(serializers.ModelSerializer):
-    # user = UserSerializer()
+    bank_account = BankAccountSerializer()
     class Meta:
         model = models.Card
         fields = '__all__'
         
 class LoanSerializer(serializers.ModelSerializer):
-    # user = UserSerializer()
+    bank_account = BankAccountSerializer()
     class Meta:
         model = models.Loan
         fields = '__all__'
