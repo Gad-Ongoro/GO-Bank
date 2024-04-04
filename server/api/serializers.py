@@ -54,3 +54,8 @@ class LoanPaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Loan_Payment
         fields = '__all__'
+
+class BranchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Branches
+        fields = '__all__'
