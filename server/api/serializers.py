@@ -59,3 +59,9 @@ class BranchSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Branches
         fields = '__all__'
+
+class EmployeeSerializer(serializers.ModelSerializer):
+    branch = BranchSerializer()
+    class Meta:
+        model = models.Employee
+        fields = '__all__'
