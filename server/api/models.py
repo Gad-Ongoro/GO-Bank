@@ -107,3 +107,11 @@ class Loan_Payment(models.Model):
     balance = models.IntegerField()
     loan = models.ForeignKey(Loan, on_delete = models.CASCADE)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
+
+class Branches(models.Model):
+    branch_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
+    name = models.CharField(max_length = 100)
+    location = models.CharField(max_length = 100)
+    opening_hours = models.TimeField()
+    closing_hours = models.TimeField()
+    open_days = models.CharField(max_length = 250)
