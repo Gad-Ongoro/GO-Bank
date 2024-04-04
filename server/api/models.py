@@ -108,7 +108,7 @@ class Loan_Payment(models.Model):
     loan = models.ForeignKey(Loan, on_delete = models.CASCADE)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
 
-class Branches(models.Model):
+class Branch(models.Model):
     branch_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
     name = models.CharField(max_length = 100)
     location = models.CharField(max_length = 100)
@@ -121,5 +121,5 @@ class Employee(models.Model):
     first_name = models.CharField(max_length = 50)
     last_name = models.CharField(max_length = 50)
     email = models.EmailField(unique = True)
-    branch = models.ForeignKey(Branches, on_delete = models.CASCADE)
+    branch = models.ForeignKey(Branch, on_delete = models.CASCADE)
     

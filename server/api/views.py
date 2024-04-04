@@ -103,3 +103,21 @@ class Loan_Payment_ListCreateAPIView(generics.ListCreateAPIView):
 class Loan_Payment_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Loan_Payment.objects.all()
     serializer_class = serializers.LoanPaymentSerializer
+    
+""" BRANCHES """
+class Branch_ListCreateAPIView(generics.ListCreateAPIView):
+    queryset = models.Branch.objects.all()
+    serializer_class = serializers.BranchSerializer
+    
+class Branch_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Branch.objects.all()
+    serializer_class = serializers.BranchSerializer
+    
+""" EMPLOYEES """
+class Employee_ListCreateAPIView(generics.ListCreateAPIView):
+    queryset = models.Employee.objects.all()
+    serializer_class = serializers.EmployeeSerializer
+    
+class Employee_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Employee.objects.all()
+    serializer_class = serializers.EmployeeSerializer

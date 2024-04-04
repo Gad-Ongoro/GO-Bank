@@ -57,7 +57,7 @@ class LoanPaymentSerializer(serializers.ModelSerializer):
 
 class BranchSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Branches
+        model = models.Branch
         fields = '__all__'
 
 class EmployeeSerializer(serializers.ModelSerializer):
