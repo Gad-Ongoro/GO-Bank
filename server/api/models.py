@@ -115,3 +115,11 @@ class Branches(models.Model):
     opening_hours = models.TimeField()
     closing_hours = models.TimeField()
     open_days = models.CharField(max_length = 250)
+
+class Employee(models.Model):
+    employee_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
+    first_name = models.CharField(max_length = 50)
+    last_name = models.CharField(max_length = 50)
+    email = models.EmailField(unique = True)
+    branch = models.ForeignKey(Branches, on_delete = models.CASCADE)
+    
