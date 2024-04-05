@@ -38,4 +38,12 @@ urlpatterns = [
     # Loan_Payment
     path('loan_payments/', views.Loan_Payment_ListCreateAPIView.as_view(), name="loan_payment_list"),
     path('loan_payment/<uuid:pk>/', views.Loan_Payment_Detail_APIView.as_view(), name='loan_payment_detail'),
+    
+    # Branches
+    path('branches/', views.Branch_ListCreateAPIView.as_view(), name="card_list"),
+    path('branches/<uuid:pk>/', views.Branch_Detail_APIView.as_view(), name='card_detail'),
+    
+    # Employees
+    path('employees/', views.Employee_ListCreateAPIView.as_view(), name="card_list"),
+    path('employees/<uuid:pk>/', views.Employee_Detail_APIView.as_view(), name='card_detail'),
 ]

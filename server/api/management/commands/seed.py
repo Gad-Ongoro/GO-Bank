@@ -29,9 +29,32 @@ class Command(BaseCommand):
     def delete_all_records(self):
         # models.Address.objects.all().delete()
         # models.Profile.objects.all().delete()
+        models.Branch.objects.all().delete()
         models.User.objects.all().delete()
         
     def seed_data(self, num_records):
+        # Branches
+        for _ in range(num_records):
+            site = rc(['Nairobi', 'Mombasa', 'Kisumu', 'Nakuru', 'Naivasha'])
+            branch_instance  = models.Branch(
+                name = f"{site} GO_Bank Branch",
+                location = site,
+                opening_hours = '08:00',
+                closing_hours = '16:00',
+                open_days = 'Monday - Saturday'
+            )
+            branch_instance.save()
+            
+        # Employees
+        for branch in models.Branch.objects.all():
+            employee_instance = models.Employee(
+                first_name = fake.first_name(),
+                last_name = fake.last_name(),
+                email = fake.email(),
+                branch = branch
+            )
+            employee_instance.save()
+ 
         # User
         for _ in range(num_records):
             user_instance = models.User(
