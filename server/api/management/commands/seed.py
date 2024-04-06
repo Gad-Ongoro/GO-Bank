@@ -4,7 +4,7 @@ from django.contrib.auth.hashers import make_password
 from faker import Faker
 from random import choice as rc, randint as ri
 from api import models
-from datetime import datetime
+from datetime import datetime, timedelta
 import pytz
 
 fake = Faker()
@@ -56,12 +56,13 @@ class Command(BaseCommand):
             employee_instance.save()
  
         # User
-        for _ in range(num_records):
+        for branch in models.Branch.objects.all():
             user_instance = models.User(
                 user_name = fake.user_name(), 
                 email = fake.email(),
                 role = rc([10, 100, 1000]),
                 password = make_password(fake.password()),
+                primary_branch = branch
             )
             user_instance.save()
 
@@ -141,14 +142,35 @@ class Command(BaseCommand):
         # Loan
         for account in models.Bank_Account.objects.all():
             type = rc(['Personal Loan', 'Mortgage', 'Auto Loan', 'Student Loan', 'Small Business Loan', 'Commercial Loan', 'Construction Loan', 'Bridge Loan'])
+            period = ri(1, 12)
+            start = datetime.now() - timedelta(days=90)
+            due_date = start + timedelta(days=30 * period)
             loan_instance = models.Loan(
                 loan_type = type,
                 amount = ri(5000, 2000000),
                 interest_rate = ri(5, 12),
-                duration = ri(1, 120),
+                duration = period,
                 collateral = type,
-                status = rc([True, False]),
+                # status = rc([True, False]),
+                status = True if due_date > datetime.now() else False,
                 bank_account = account,
-                due_date = datetime.now()
+                start_date = start,
+                due_date = due_date
             )
             loan_instance.save()
+
+        # Loan_Payment
+        for loan in models.Loan.objects.all():
+            to_be_paid = loan.amount + (loan.amount * loan.interest_rate/100)
+            paid_back = to_be_paid * 2/(loan.duration)
+            loan_payment_instance = models.Loan_Payment(
+                total_paid = paid_back,
+                last_pay_amount = paid_back / 2,
+                upcoming_pay_amount = paid_back / 2,
+                last_pay_date = None,
+                upcoming_pay_date = (datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d') if loan.status == True else '0000-00-00',
+                balance = loan.amount - paid_back,
+                loan = loan,
+                bank_account = loan.bank_account
+            )
+            loan_payment_instance.save()

@@ -1,7 +1,19 @@
 from rest_framework import serializers
 from . import models
 
+class BranchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Branch
+        fields = '__all__'
+
+class EmployeeSerializer(serializers.ModelSerializer):
+    branch = BranchSerializer()
+    class Meta:
+        model = models.Employee
+        fields = '__all__'
+
 class UserSerializer(serializers.ModelSerializer):
+    # primary_branch = BranchSerializer()
     class Meta:
         model = models.User
         fields = '__all__'
@@ -43,25 +55,14 @@ class CardSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 class LoanSerializer(serializers.ModelSerializer):
-    bank_account = BankAccountSerializer()
+    # bank_account = BankAccountSerializer()
     class Meta:
         model = models.Loan
         fields = '__all__'
-        
+
 class LoanPaymentSerializer(serializers.ModelSerializer):
-    # loan = LoanSerializer()
-    # user = UserSerializer()
+    loan = LoanSerializer()
+    # bank_account = BankAccountSerializer()
     class Meta:
         model = models.Loan_Payment
-        fields = '__all__'
-
-class BranchSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Branch
-        fields = '__all__'
-
-class EmployeeSerializer(serializers.ModelSerializer):
-    branch = BranchSerializer()
-    class Meta:
-        model = models.Employee
         fields = '__all__'

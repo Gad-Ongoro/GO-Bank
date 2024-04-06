@@ -9,6 +9,21 @@ EA_timezone = pytz.timezone('Africa/Nairobi')
 current_datetime = datetime.now(EA_timezone)
 
 # Create your models here.
+class Branch(models.Model):
+    branch_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
+    name = models.CharField(max_length = 100)
+    location = models.CharField(max_length = 100)
+    opening_hours = models.TimeField()
+    closing_hours = models.TimeField()
+    open_days = models.CharField(max_length = 250)
+
+class Employee(models.Model):
+    employee_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
+    first_name = models.CharField(max_length = 50)
+    last_name = models.CharField(max_length = 50)
+    email = models.EmailField(unique = True)
+    branch = models.ForeignKey(Branch, on_delete = models.CASCADE)
+
 class User(models.Model):
     user_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
     user_name = models.CharField(max_length=100)
@@ -17,6 +32,7 @@ class User(models.Model):
     password = models.CharField(max_length=250)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    primary_branch = models.ForeignKey(Branch, on_delete = models.CASCADE)
     
     def __str__(self):
         return self.user_name
@@ -75,7 +91,7 @@ class Card(models.Model):
     CVV = models.IntegerField()
     date_issued = models.CharField(max_length = 50, default = issue_date)
     expiration_date = models.CharField(max_length = 50, default = exp_date)
-    bank_account = models.ForeignKey(Bank_Account, on_delete = models.CASCADE, default = None)
+    bank_account = models.ForeignKey(Bank_Account, on_delete = models.CASCADE)
 
 class Transaction(models.Model):
     transaction_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
@@ -96,30 +112,15 @@ class Loan(models.Model):
     status = models.BooleanField(default = False)
     start_date = models.DateField(default = django.utils.timezone.now)
     due_date = models.DateField()
-    bank_account = models.ForeignKey(Bank_Account, on_delete = models.CASCADE, default = None)
+    bank_account = models.ForeignKey(Bank_Account, on_delete = models.CASCADE)
 
 class Loan_Payment(models.Model):
     loan_payment_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
+    total_paid = models.IntegerField()
     last_pay_amount = models.IntegerField()
     upcoming_pay_amount = models.IntegerField()
     last_pay_date = models.DateTimeField(auto_now = True)
-    upcoming_pay_date = models.DateField()
+    upcoming_pay_date = models.CharField(max_length = 50)
     balance = models.IntegerField()
     loan = models.ForeignKey(Loan, on_delete = models.CASCADE)
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
-
-class Branch(models.Model):
-    branch_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
-    name = models.CharField(max_length = 100)
-    location = models.CharField(max_length = 100)
-    opening_hours = models.TimeField()
-    closing_hours = models.TimeField()
-    open_days = models.CharField(max_length = 250)
-
-class Employee(models.Model):
-    employee_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
-    first_name = models.CharField(max_length = 50)
-    last_name = models.CharField(max_length = 50)
-    email = models.EmailField(unique = True)
-    branch = models.ForeignKey(Branch, on_delete = models.CASCADE)
-    
+    bank_account = models.ForeignKey(Bank_Account, on_delete = models.CASCADE)
