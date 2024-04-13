@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 import uuid
 import django
 
@@ -23,6 +24,18 @@ class Employee(models.Model):
     last_name = models.CharField(max_length = 50)
     email = models.EmailField(unique = True)
     branch = models.ForeignKey(Branch, on_delete = models.CASCADE)
+    
+class CustomUser(AbstractUser):
+    # Custom fields
+    user_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
+    role = models.IntegerField(default = 1000)
+    password = models.CharField(max_length=250)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    primary_branch = models.ForeignKey(Branch, on_delete = models.CASCADE)
+
+    def __str__(self):
+        return self.username
 
 class User(models.Model):
     user_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
