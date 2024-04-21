@@ -30,7 +30,7 @@ class Command(BaseCommand):
         # models.Address.objects.all().delete()
         # models.Profile.objects.all().delete()
         models.Branch.objects.all().delete()
-        models.User.objects.all().delete()
+        models.CustomUser.objects.all().delete()
         
     def seed_data(self, num_records):
         # Branches
@@ -57,8 +57,8 @@ class Command(BaseCommand):
  
         # User
         for branch in models.Branch.objects.all():
-            user_instance = models.User(
-                user_name = fake.user_name(), 
+            user_instance = models.CustomUser(
+                username = fake.user_name(), 
                 email = fake.email(),
                 role = rc([10, 100, 1000]),
                 password = make_password(fake.password()),
@@ -67,7 +67,7 @@ class Command(BaseCommand):
             user_instance.save()
 
         # Profile
-        for user in models.User.objects.all():
+        for user in models.CustomUser.objects.all():
             profile_instance = models.Profile(
                 first_name = fake.first_name(),
                 last_name = fake.last_name(),
@@ -84,7 +84,7 @@ class Command(BaseCommand):
             profile_instance.save()
             
         # Address
-        for user in models.User.objects.all():
+        for user in models.CustomUser.objects.all():
             address_instance = models.Address(
                 street = fake.street_name(),
                 city = fake.city(),
@@ -105,7 +105,7 @@ class Command(BaseCommand):
             user_instance.save()
 
         # Bank_Account
-        for user in models.User.objects.all():
+        for user in models.CustomUser.objects.all():
             bank_account_instance = models.Bank_Account(
                 account_type = rc(['Personal', 'Corporate', 'Savings', 'Joint', 'Retirement', 'Student']),
                 account_number = fake.credit_card_number(),

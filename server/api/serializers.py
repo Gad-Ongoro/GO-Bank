@@ -1,17 +1,5 @@
-from django.contrib.auth.models import User
 from rest_framework import serializers
 from . import models
-
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ['id', 'username', 'password', ]
-#         extra_kwargs = {"password": {"write_only": True}}
-
-#     def create(self, validated_data):
-#         print(validated_data)
-#         user = User.objects.create_user(**validated_data)
-#         return user
 
 class BranchSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,12 +11,45 @@ class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Employee
         fields = '__all__'
-
-class UserSerializer(serializers.ModelSerializer):
+        
+class CustomUserSerializer(serializers.ModelSerializer):
     # primary_branch = BranchSerializer()
+
     class Meta:
-        model = models.User
-        fields = '__all__'
+        model = models.CustomUser
+        fields = ['id', 'username', 'email', 'role', 'password', 'created_at', 'updated_at', 'primary_branch']
+        extra_kwargs = {
+            'password': {'write_only': True},
+        }
+        
+    # def create(self, validated_data):
+    #     primary_branch_data = validated_data.pop('primary_branch')
+    #     primary_branch = models.Branch.objects.create(**primary_branch_data)
+    #     user = models.CustomUser.objects.create(primary_branch=primary_branch, **validated_data)
+    #     return user
+
+    def create(self, validated_data):
+        print(validated_data)
+        user = models.CustomUser.objects.create_user(**validated_data)
+        return user
+
+    def update(self, instance, validated_data):
+        primary_branch_data = validated_data.pop('primary_branch', None)
+        if primary_branch_data:
+            primary_branch = instance.primary_branch
+            for key, value in primary_branch_data.items():
+                setattr(primary_branch, key, value)
+            primary_branch.save()
+        for key, value in validated_data.items():
+            setattr(instance, key, value)
+        instance.save()
+        return instance
+
+# class UserSerializer(serializers.ModelSerializer):
+#     # primary_branch = BranchSerializer()
+#     class Meta:
+#         model = models.User
+#         fields = '__all__'
         
 class ProfileSerializer(serializers.ModelSerializer):
     # user = UserSerializer()

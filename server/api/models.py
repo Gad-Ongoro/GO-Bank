@@ -27,28 +27,18 @@ class Employee(models.Model):
     
 class CustomUser(AbstractUser):
     # Custom fields
-    user_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
+    id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
     role = models.IntegerField(default = 1000)
-    password = models.CharField(max_length=250)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     primary_branch = models.ForeignKey(Branch, on_delete = models.CASCADE)
+
+    # Related_name to avoid clashes with built-in User model
+    groups = models.ManyToManyField('auth.Group', related_name='customuser_set', blank=True)
+    user_permissions = models.ManyToManyField('auth.Permission', related_name='customuser_set', blank=True)
 
     def __str__(self):
         return self.username
-
-class User(models.Model):
-    user_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
-    user_name = models.CharField(max_length=100)
-    email = models.EmailField(unique = True)
-    role = models.IntegerField(default = 1000)
-    password = models.CharField(max_length=250)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    primary_branch = models.ForeignKey(Branch, on_delete = models.CASCADE)
-    
-    def __str__(self):
-        return self.user_name
 
 class Profile(models.Model):
     profile_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
@@ -62,7 +52,7 @@ class Profile(models.Model):
     ID_number = models.IntegerField()
     country_of_residence = models.CharField(max_length = 100)
     profile_photo = models.URLField()
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -73,7 +63,7 @@ class Address(models.Model):
     city = models.CharField(max_length = 100)
     state = models.CharField(max_length = 100)
     zipcode = models.CharField(max_length = 50)
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
 
 class Beneficiary(models.Model):
     beneficiary_id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
@@ -91,7 +81,7 @@ class Bank_Account(models.Model):
     account_number = models.IntegerField(unique = True)
     balance = models.DecimalField(max_digits=20, decimal_places=2)
     loan_limit = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     
 class Card(models.Model):
     issue_date = current_datetime.strftime('%m/%y')

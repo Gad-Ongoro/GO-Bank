@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -7,8 +7,8 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     # User
-    path('users/', views.Users_ListCreateApiView.as_view(), name='users_list'),
-    path('users/<uuid:pk>/', views.User_Detail_APIView.as_view(), name='user_detail'),
+    path('users/', views.CustomUser_ListCreateView.as_view(), name='users_list_create'),
+    path('users/<uuid:pk>/', views.CustomUser_DetailView.as_view(), name='user_detail'),
 
     # Profile
     path('profiles/', views.Profile_ListCreateAPIView.as_view(), name='profiles_list'),
@@ -54,4 +54,5 @@ urlpatterns = [
     # JWT
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api-auth/', include('rest_framework.urls')),
 ]

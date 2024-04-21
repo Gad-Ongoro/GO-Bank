@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics, status
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from . import models
 from . import serializers
@@ -8,13 +9,14 @@ from django.urls import reverse_lazy
 
 # Create your views here.
 """ USERS """
-class Users_ListCreateApiView(generics.ListCreateAPIView):
-    queryset = models.User.objects.all()
-    serializer_class = serializers.UserSerializer
+class CustomUser_ListCreateView(generics.ListCreateAPIView):
+    queryset = models.CustomUser.objects.all()
+    serializer_class = serializers.CustomUserSerializer
+    permission_classes = [AllowAny]
     
-class User_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.User.objects.all()
-    serializer_class = serializers.UserSerializer
+class CustomUser_DetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.CustomUser.objects.all()
+    serializer_class = serializers.CustomUserSerializer
     
 """ PROFILES """
 class Profile_ListCreateAPIView(generics.ListCreateAPIView):

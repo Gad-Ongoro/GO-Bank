@@ -143,6 +143,7 @@ REST_FRAMEWORK = {
     )
 }
 
+AUTH_USER_MODEL = 'api.CustomUser'
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
