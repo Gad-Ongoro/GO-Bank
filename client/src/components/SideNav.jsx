@@ -10,6 +10,7 @@ function SideNav() {
     		>
 				<TbSmartHome size={30}/>
 			</IconContext.Provider>
+	
 		</div>
 	)
 }
