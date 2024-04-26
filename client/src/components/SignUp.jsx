@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import api from '../api';
+
 
 function SignUp() {
-	let [signUpInputs, setSignUpInputs] = useState({});
-	let [branches, setBranches] = useState({})
+	let [signUpData, setSignUpData] = useState({});
+	let [branches, setBranches] = useState({});
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		fetch(`http://127.0.0.1:8000/branches/`)
@@ -35,25 +39,29 @@ function SignUp() {
 			value = e.target.options[e.target.selectedIndex].value;
 		}
 
-		setSignUpInputs(current => ({...current, [name]: value}));
-		console.log(signUpInputs);
+		setSignUpData(current => ({...current, [name]: value}));
+		console.log(signUpData);
 	}
 
-	function handleSubmit(e){
-		e.preventDefault()
-		e.target.reset()
+	const handleSubmit = (e) => {
+        e.preventDefault();
 
-		fetch(`http://127.0.0.1:8000/users/`, {
-			method: 'POST',
-			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify(signUpInputs)
-		})
-		.then(response => response.json())
+		api.post('/users/', signUpData)
+		.then(response => response.data)
 		.then(data => {
+			navigate('/signin')
 			console.log(data)
 		})
-		.catch(error => console.log(error))
-	}
+		.catch(error => {
+			if (error.response.data.username){
+				alert(error.response.data.username[0]);
+			} else if(error.response.data.email) {
+				alert(error.response.data.email)
+			} else {
+				alert(error.message)
+			}
+        })
+    };
 
 	return (
 		<div className=''>
