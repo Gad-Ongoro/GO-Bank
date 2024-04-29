@@ -45,6 +45,7 @@ function SignUp() {
 
 	const handleSubmit = (e) => {
         e.preventDefault();
+		e.target.reset();
 
 		api.post('/users/', signUpData)
 		.then(response => response.data)
@@ -65,9 +66,9 @@ function SignUp() {
 
 	return (
 		<div className=''>
-			<div className=''>
-				<form onSubmit={handleSubmit} className='d-flex flex-column justify-content-center align-items-center'>
-					<div className="form-floating mb-3 mt-3 w-50">
+			<div className='h-screen'>
+				<form onSubmit={handleSubmit} className='w-full h-full flex flex-column justify-center align-center items-center'>
+					<div className="form-floating mb-1 mt-3 w-50">
 						<input type="text" className="form-control" id="username" placeholder="Enter username" name="username" onChange={handleInputChange}></input>
 						<label htmlFor="username">Username</label>
 					</div>
@@ -101,7 +102,10 @@ function SignUp() {
 						<label htmlFor="sel2" className="form-label">Select Primary Branch:</label>
 					</div>
 
-					<input type="submit" className='w-50'></input>
+					<input 
+						type="submit" 
+						className='h-10 mt-3 w-25 bg-green-400 text-white text-lg font-bold rounded'
+						value={"Register"}></input>
 				</form>
 			</div>
 		</div>

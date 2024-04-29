@@ -1,14 +1,16 @@
-import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useRef, useContext } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants';
 import api from '../api';
+import { BankContext } from '../App';
 
 function SignIn() {
 	let [signInData, setSignInData] = useState({});
 	let [recaptchaCheck, setRecaptchaCheck] = useState(false);
 	const signInBtn = useRef();
 	const navigate = useNavigate();
+	let { setSignedIn } = useContext(BankContext);
 
 	function handleInputChange(e){
 		let name = e.target.name;
@@ -19,7 +21,6 @@ function SignIn() {
 		}
 
 		setSignInData(current => ({...current, [name]: value}));
-		console.log(signInData);
 	}
 
 	const handleSubmit = async (e) => {
@@ -30,7 +31,8 @@ function SignIn() {
             const res = await api.post("/api/token/", signInData)
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
                 localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-                navigate("/")
+				setSignedIn(true);
+                navigate("/");
         } catch (error) {
             alert(error)
         } finally {
@@ -57,8 +59,8 @@ function SignIn() {
 
 	return (
 		<div className=''>
-			<div className=''>
-				<form onSubmit={handleSubmit} className='d-flex flex-column justify-content-center align-items-center'>
+			<div className='h-screen'>
+				<form onSubmit={handleSubmit} className='w-full h-full d-flex flex-column justify-center items-center'>
 					<div className="form-floating mb-1 mt-3 w-50">
 						<input type="text" className="form-control" id="username" placeholder="Enter username" name="username" onChange={handleInputChange}></input>
 						<label htmlFor="username">Username</label>
@@ -87,6 +89,8 @@ function SignIn() {
 						value={'Login'}
 						disabled={!recaptchaCheck}>
 					</input>
+
+					<p className='text-white my-3 text-lg'>Don't have an account? <span className='text-green-500'><NavLink to={'/register'}>SignUp</NavLink></span> </p>
 				</form>
 			</div>
 		</div>

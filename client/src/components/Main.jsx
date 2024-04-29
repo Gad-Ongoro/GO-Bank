@@ -2,13 +2,13 @@ import React from 'react';
 
 function Main() {
 	return (
-		<div className='container'>
+		<div className='container mb-5'>
 
 			<section className=''>
 			<div className='d-flex justify-content-around my-5'>
 				<div>
 					<div>
-						<h2 className='text-4xl font-bold tracking-wide leading-relaxed'>Banking made <span className='text-green-500'>simply</span> for you.</h2>
+						<h2 className='text-4xl font-bold tracking-wide leading-relaxed'>Banking <span className='text-green-500'>simply</span> made for you.</h2>
 						<p className='text-lg my-2'>Banking solutions at your fingertips</p>
 						<p className='text-lg my-2'>We are your partner. We share your vision. Go Above! Go Beyond!</p>
 					</div>
@@ -54,7 +54,7 @@ function Main() {
 				<div className=''>
 					<h2 className='text-center text-4xl text-green-400 my-5'>Cards</h2>
 
-					<div className='grid grid-cols-2 justify-between flex-wrap gap-6'>
+					<div className='grid grid-cols-3 justify-between gap-6'>
 						<div className='p-0 m-0 rounded'>
 							<div className='container'>
 								<div className='w-full h-56 relative'>
@@ -63,6 +63,9 @@ function Main() {
 								
 								<h3 className='text-center text-green-500 text-xl'>Debit Cards(ATM CARDS)</h3>
 								<p className='text-lg tracking-wide container'>Apply for Visa Debit Card Faster, safer and more convenient than cash</p>
+								<div className='text-center'>
+									<button type='button' className='rounded-pill bg-green-500 text-white w-50 h-10 font-bold'>Learn More</button>
+								</div>
 							</div>
 						</div>
 
@@ -73,6 +76,9 @@ function Main() {
 								</div>
 								<h3 className='text-center text-green-500 text-xl'>Credit Cards</h3>
 								<p className='text-lg tracking-wide'>This is a Visa Credit Card designed for anyone who wants to access credit</p>
+								<div className='text-center'>
+									<button type='button' className='rounded-pill bg-green-500 text-white w-50 h-10 font-bold'>Learn More</button>
+								</div>
 							</div>
 						</div>
 
@@ -83,6 +89,9 @@ function Main() {
 								</div>
 								<h3 className='text-center text-green-500 text-xl'>Prepaid Cards</h3>
 								<p className='text-lg tracking-wide'>You do not have to be a Co-op Bank customer to own a Co-op Pre-paid Card!</p>
+								<div className='text-center'>
+									<button type='button' className='rounded-pill bg-green-500 text-white w-50 h-10 font-bold'>Learn More</button>
+								</div>
 							</div>
 						</div>
 
@@ -93,6 +102,9 @@ function Main() {
 								</div>
 								<h3 className='text-center text-green-500 text-xl'>Platinum Card</h3>
 								<p className='text-lg tracking-wide'>Enjoy the benefit of accessing airport VIP lounges globally at a highly discounted rate</p>
+								<div className='text-center'>
+									<button type='button' className='rounded-pill bg-green-500 text-white w-50 h-10 font-bold'>Learn More</button>
+								</div>
 							</div>
 						</div>
 					</div>
