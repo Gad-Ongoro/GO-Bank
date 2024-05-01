@@ -35,10 +35,11 @@ class Command(BaseCommand):
     def seed_data(self, num_records):
         # Branches
         branches = ['Nairobi', 'Mombasa', 'Kisumu', 'Nakuru', 'Naivasha']
-        for branch in branches:
+        # for branch in branches:
+        for _ in range(num_records):
             branch_instance  = models.Branch(
-                name = f"{branch} GO_Bank Branch",
-                location = branch,
+                name = f"{rc(branches)} GO_Bank Branch",
+                location = rc(branches),
                 opening_hours = '08:00',
                 closing_hours = '16:00',
                 open_days = 'Monday - Saturday'

@@ -43,6 +43,9 @@ function Header() {
 							{/* <li className='navlink'>
 								<NavLink to={'/register'} className='navlink m-3 no-underline'>Signup</NavLink>
 							</li> */}
+							<li className='navlink'>
+								<NavLink to={'/customer_dashboard'} className='navlink m-3 no-underline'>Account</NavLink>
+							</li>
 						</ul>
 					</div>
 				</div>

@@ -6,11 +6,10 @@ function SideNav() {
 	return (
 		<div>
 			<IconContext.Provider
-      			value={{ color: 'black', size: '30px' }}
+      			value={{ color: 'white', size: '30px' }}
     		>
-				<TbSmartHome size={30}/>
+				<TbSmartHome size={35}/>
 			</IconContext.Provider>
-	
 		</div>
 	)
 }
