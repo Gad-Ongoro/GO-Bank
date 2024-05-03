@@ -78,14 +78,14 @@ function SignIn() {
 					</div>
 
 					<ReCAPTCHA
-    					sitekey="6LdeE1MpAAAAAEfpO0m3ZVvfjnAVGJU4-Nr0HpSq"
+    					sitekey="6Lcw1s0pAAAAAG7gNntupjsrom2oVK57LwoxZHre"
     					onChange={onRecaptchaCheck}
   					/>
 
 					<input 
 						type="submit" 
 						ref={signInBtn}
-						className='h-10 mt-3 w-25 bg-green-400 text-white text-lg font-bold rounded' 
+						className='transition-all duration-300 h-10 mt-3 w-25 bg-green-400 text-white text-lg font-bold rounded' 
 						value={'Login'}
 						disabled={!recaptchaCheck}>
 					</input>
