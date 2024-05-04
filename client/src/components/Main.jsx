@@ -2,7 +2,7 @@ import React from 'react';
 
 function Main() {
 	return (
-		<div className='container mb-5'>
+		<div className='container mb-5 h-screen'>
 
 			<section className=''>
 			<div className='d-flex justify-content-around my-5'>

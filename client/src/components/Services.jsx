@@ -2,7 +2,7 @@ import React from 'react';
 
 function Services() {
     return (
-        <div>
+        <div className='h-screen'>
             <div className='container grid grid-cols-3 gap-5'>
                 <div>
                     <h2 className='text-4xl font-bold text-green-400 my-3'>Personal Banking</h2>
@@ -38,7 +38,7 @@ function Services() {
                 </div>
                 <div>
                     <h2 className='text-3xl font-bold text-green-400 my-3'>Treasury Products</h2>
-                    <p>Co-op bank provides its customers flexibility of doing their Foreign exchange conversions to be delivered immediately or up to a maximum of 2 working days to give them convenience in settlement</p>
+                    <p>GO Bank provides its customers flexibility of doing their Foreign exchange conversions to be delivered immediately or up to a maximum of 2 working days to give them convenience in settlement</p>
                 </div>
             </div>
         </div>
