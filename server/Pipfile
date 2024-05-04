@@ -21,6 +21,8 @@ python-dotenv = "*"
 psycopg2-binary = "*"
 sqlparse = "*"
 django-cors-headers = "*"
+django-environ = "*"
+tzdata = "*"
 
 [dev-packages]
 

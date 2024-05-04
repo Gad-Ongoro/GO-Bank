@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.core.mail import send_mail
 from . import models
 
 class BranchSerializer(serializers.ModelSerializer):
@@ -31,7 +32,16 @@ class CustomUserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         print(validated_data)
         user = models.CustomUser.objects.create_user(**validated_data)
+        self.email_user(user)
         return user
+    
+    subject = 'Verify Your Email'
+    from_email = 'gadongoro1@fastmail.com'
+    message = 'Please click the link below to verify your email:\n\nhttp://your-domain.com/verify-email/?token=your_verification_token'
+        
+    def email_user(self, user):
+        """Send an email to this user."""
+        send_mail(self.subject, self.message, self.from_email, [user.email], fail_silently=False)
 
     def update(self, instance, validated_data):
         primary_branch_data = validated_data.pop('primary_branch', None)

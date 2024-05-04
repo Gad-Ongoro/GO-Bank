@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "52231701370e852138a7ab8a46a1a104b50881f48011792d184d0538dabb4429"
+            "sha256": "b9a9d634177952fe5b46a519f95d78bf3ddb1d3a1da3062b6dcdb1fc108bfd59"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -52,6 +52,15 @@
             "markers": "python_version >= '3.8'",
             "version": "==4.3.1"
         },
+        "django-environ": {
+            "hashes": [
+                "sha256:0ff95ab4344bfeff693836aa978e6840abef2e2f1145adff7735892711590c05",
+                "sha256:f32a87aa0899894c27d4e1776fa6b477e8164ed7f6b3e410a62a6d72caaf64be"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.6' and python_version < '4'",
+            "version": "==0.11.2"
+        },
         "django-filter": {
             "hashes": [
                 "sha256:48e5fc1da3ccd6ca0d5f9bb550973518ce977a4edde9d2a8a154a7f4f0b9f96e",
@@ -95,12 +104,12 @@
         },
         "faker": {
             "hashes": [
-                "sha256:34b947581c2bced340c39b35f89dbfac4f356932cfff8fe893bde854903f0e6e",
-                "sha256:adb98e771073a06bdc5d2d6710d8af07ac5da64c8dc2ae3b17bb32319e66fd82"
+                "sha256:6737cc6d591cd83421fdc5e494f6e2c1a6e32266214f158b745aa9fa15687c98",
+                "sha256:c153505618801f1704807b258a6010ea8cabf91f66f4788939bfdba83b887e76"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==24.11.0"
+            "version": "==25.0.1"
         },
         "markdown": {
             "hashes": [
@@ -282,6 +291,15 @@
             ],
             "markers": "python_version < '3.11'",
             "version": "==4.11.0"
+        },
+        "tzdata": {
+            "hashes": [
+                "sha256:2674120f8d891909751c38abcdfd386ac0a5a1127954fbc332af6b5ceae07efd",
+                "sha256:9068bc196136463f5245e51efda838afa15aaeca9903f49050dfa2679db4d252"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '2'",
+            "version": "==2024.1"
         },
         "uuid": {
             "hashes": [
