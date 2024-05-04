@@ -60,7 +60,10 @@ function SignIn() {
 	return (
 		<div className=''>
 			<div className='h-screen'>
-				<form onSubmit={handleSubmit} className='w-full h-full d-flex flex-column justify-center items-center'>
+				<div className='text-center'>
+					<h2 className='text-green-500 font-bold text-2xl mb-3'>Welcome back!</h2>
+				</div>
+				<form onSubmit={handleSubmit} className='w-full d-flex flex-column justify-center items-center'>
 					<div className="form-floating mb-1 mt-3 w-50">
 						<input type="text" className="form-control" id="username" placeholder="Enter username" name="username" onChange={handleInputChange}></input>
 						<label htmlFor="username">Username</label>
@@ -90,7 +93,7 @@ function SignIn() {
 						disabled={!recaptchaCheck}>
 					</input>
 
-					<p className='text-white my-3 text-lg'>Don't have an account? <span className='text-green-500'><NavLink to={'/register'}>SignUp</NavLink></span> </p>
+					<p className='text-white my-3 text-lg'>Don't have an account ? <span className='text-green-500'><NavLink to={'/register'} className='ml-1'> Sign Up</NavLink></span> </p>
 				</form>
 			</div>
 		</div>
