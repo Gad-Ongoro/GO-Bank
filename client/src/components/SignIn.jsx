@@ -64,18 +64,18 @@ function SignIn() {
 					<h2 className='text-green-500 font-bold text-2xl mb-3'>Welcome back!</h2>
 				</div>
 				<form onSubmit={handleSubmit} className='w-full d-flex flex-column justify-center items-center'>
-					<div className="form-floating mb-1 mt-3 w-50">
+					<div className="form-floating mb-1 mt-3 w-10/12 md:w-1/2">
 						<input type="text" className="form-control" id="username" placeholder="Enter username" name="username" onChange={handleInputChange}></input>
 						<label htmlFor="username">Username</label>
 					</div>
 
 					{/* EMAIL */}
-					{/* <div className="form-floating mb-3 mt-3 w-50">
+					{/* <div className="form-floating mb-3 mt-3 w-10/12 md:w-1/2">
 						<input type="text" className="form-control" id="email" placeholder="Enter email" name="email" onChange={handleInputChange}></input>
 						<label htmlFor="email">Email</label>
 					</div> */}
 
-					<div className="form-floating mb-3 mt-3 w-50">
+					<div className="form-floating mb-3 mt-3 w-10/12 md:w-1/2">
 						<input type="password" className="form-control" id="password" placeholder="Enter password" name="password" onChange={handleInputChange}></input>
 						<label htmlFor="password">Password</label>
 					</div>
@@ -88,7 +88,7 @@ function SignIn() {
 					<input 
 						type="submit" 
 						ref={signInBtn}
-						className='transition-all duration-300 h-10 mt-3 w-25 bg-green-400 text-white text-lg font-bold rounded' 
+						className='transition-all duration-300 h-11 mt-3 w-3/4 md:w-1/3 bg-green-400 text-white text-lg font-bold rounded' 
 						value={'Login'}
 						disabled={!recaptchaCheck}>
 					</input>

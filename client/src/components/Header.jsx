@@ -12,16 +12,16 @@ function Header() {
 
 	return (
 		<header className='sticky top-0 z-50 backdrop-blur'>
-			<div className='container d-flex justify-content-between'>
+			<div className='container flex flex-col md:flex-row justify-content-between'>
 				<div>
 					<NavLink 
 						to={'/'}
 						className={'no-underline'}
 					>
-						<h1 className='text-2xl font-bold mt-1 p-0 text-green-500'>GO Bank</h1>
+						<h1 className='text-2xl font-bold mt-1 p-0 text-green-500 text-center'>GO Bank</h1>
 					</NavLink>
 				</div>
-				<div className='nav_holder d-flex'>
+				<div className='nav_holder flex'>
 					<div className='m-2'>
 						<ul className='d-flex list-none'>
 							<li className='navlink'>

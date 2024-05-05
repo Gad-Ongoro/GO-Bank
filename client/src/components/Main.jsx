@@ -2,14 +2,14 @@ import React from 'react';
 
 function Main() {
 	return (
-		<div className='container mb-5 h-screen'>
+		<div className='container mb-5'>
 
 			<section className=''>
-			<div className='d-flex justify-content-around my-5'>
+			<div className='flex justify-around flex-col md:flex-row my-5'>
 				<div>
 					<div>
 						<h2 className='text-4xl font-bold tracking-wide leading-relaxed'>Banking <span className='text-green-500'>simply</span> made for you.</h2>
-						<p className='text-lg my-2'>Banking solutions at your fingertips</p>
+						<p className='text-lg my-2'>Banking solutions at your fingertips .</p>
 						<p className='text-lg my-2'>We are your partner. We share your vision. Go Above! Go Beyond!</p>
 					</div>
 					<div>
@@ -21,7 +21,7 @@ function Main() {
 					</div>
 				</div>
 
-				<div style={{'borderRadius': '47% 53% 41% 59% / 45% 41% 59% 55%', 'overflow': 'hidden'}}>
+				<div className='w-2/4 md:w-80' style={{'borderRadius': '47% 53% 41% 59% / 45% 41% 59% 55%', 'overflow': 'hidden'}}>
 					<img
 						className='rounded'
 						src="https://i.pinimg.com/originals/15/8f/7b/158f7b292473c35812ad97f6b317a668.gif" 
@@ -32,7 +32,7 @@ function Main() {
 				</div>
 			</div>
 
-			<div className='container flex justify-around'>
+			<div className='container flex flex-col md:flex-row gap-4 justify-around text-center'>
 				<div className='text-4xl'>
 					<p><span className='text-green-500'>100+</span> Branches & ATM</p>
 				</div>
@@ -54,7 +54,7 @@ function Main() {
 				<div className=''>
 					<h2 className='text-center text-4xl text-green-400 my-5'>Cards</h2>
 
-					<div className='grid grid-cols-3 justify-between gap-6'>
+					<div className='grid grid-cols-1 md:grid-cols-3 justify-between gap-6'>
 						<div className='p-0 m-0 rounded'>
 							<div className='container'>
 								<div className='w-full h-56 relative'>

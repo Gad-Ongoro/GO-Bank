@@ -2,7 +2,7 @@ import React from 'react';
 
 function About() {
 	return (
-		<div className='container h-screen'>
+		<div className='container'>
 			<div>
 				<h2 className='text-center text-4xl font-bold text-green-400 my-3'>About Us</h2>
 				<p className='text-lg tracking-wide'>Go Bank is incorporated in Kenya under the Company Act and is also licensed to do the business of banking under the Banking Act.</p>

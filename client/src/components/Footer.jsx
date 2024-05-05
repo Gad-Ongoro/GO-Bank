@@ -7,7 +7,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 function Footer() {
 	return (
-		<footer className='bg-gray-950 text-gray-400 text-sm grid justify-between grid-cols-3 text-center'>
+		<footer className='bg-gray-950 text-gray-400 text-sm grid justify-between grid-cols-1 md:grid-cols-3 text-center'>
 			<div className='container'>
 				<div>
 					<div>
