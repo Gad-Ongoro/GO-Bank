@@ -9,7 +9,7 @@ import { TbLogout2 } from "react-icons/tb";
 
 function SideNav() {
 	return (
-		<div className='container h-full flex flex-col justify-center items-center gap-14 my-5 border-r-2 border-gray-500'>
+		<div className='container flex flex-col justify-center items-center gap-14 border-r-2 border-gray-500'>
 			{/* <IconContext.Provider
       			value={{ color: 'white', size: '30px' }}
     		>

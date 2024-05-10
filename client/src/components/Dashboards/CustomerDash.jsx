@@ -1,18 +1,22 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import SideNav from './SideNav';
 import NavBar from './NavBar';
+import DashView from './DashView';
 
 function CustomerDash() {
 	return (
-		<div className='container h-screen'>
-			<div className='w-11/12 float-right sticky top-10'>
+		<div className='container h-screen grid grid-cols-12'>
+			<div className='sticky top-10 col-start-2 col-end-13 backdrop-blur'>
 				<NavBar></NavBar>
 			</div>
-			<div className='w-1/12 float-left sticky top-10'>
+			<div className='row-start-2 row-end-13'>
 				<SideNav></SideNav>
 			</div>
-			<div>
-				
+			<div className='row-start-2 row-end-13 col-start-2 col-end-13'>
+				<Routes>
+					<Route path='/dashview' element={<DashView></DashView>}></Route>
+				</Routes>
 			</div>
 		</div>
 	)
