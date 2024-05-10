@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { TbSmartHome } from "react-icons/tb";
 // import { IconContext } from 'react-icons/lib';
 import { CgProfile } from "react-icons/cg";
@@ -15,8 +16,12 @@ function SideNav() {
     		>
 				<TbSmartHome size={35}/>
 			</IconContext.Provider> */}
-			<TbSmartHome className='transition-all duration-400 cursor-pointer hover:text-green-500' size={30}/>
-			<CgProfile className='transition-all duration-400 cursor-pointer hover:text-green-500' size={30} />
+			<NavLink to={'/'}>
+				<TbSmartHome className='transition-all duration-400 cursor-pointer hover:text-green-500' size={30}/>
+			</NavLink>
+			<NavLink to={'/customer_dashboard/dashview'}>
+				<CgProfile className='transition-all duration-400 cursor-pointer hover:text-green-500' size={30} />
+			</NavLink>
 			<IoNotificationsOutline className='transition-all duration-400 cursor-pointer hover:text-green-500' size={30} />
 			<MdOutlineFavoriteBorder className='transition-all duration-400 cursor-pointer hover:text-green-500' size={30} />
 			<RiSettings3Line className='transition-all duration-400 cursor-pointer hover:text-green-500' size={30} />

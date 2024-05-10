@@ -5,7 +5,7 @@ import { FiEdit3 } from "react-icons/fi";
 function NavBar() {
 	return (
 		<div>
-			<div className='container flex justify-between'>
+			<div className='container flex flex-col md:flex-row justify-center items-center md:justify-between text-center gap-3'>
 				<div className="flex gap-3">
 					<div className="relative">
 						<img 
@@ -15,7 +15,7 @@ function NavBar() {
 						</img>
 						<FiEdit3 className="transition-all duration-300 cursor-pointer absolute left-2/3 top-2/3 hover:text-green-500" />
 					</div>
-					<div className="flex justify-center items-center">
+					<div className="flex justify-center items-center text-center">
 						<p>Gad Ongoro</p>
 					</div>
 				</div>

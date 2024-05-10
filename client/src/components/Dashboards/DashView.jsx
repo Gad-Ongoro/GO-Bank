@@ -6,7 +6,7 @@ function DashView() {
 			<div className='col-span-8'>
 				<div>
 					<h2 className='text-lg my-2'>Recent Transactions</h2>
-					<div className='grid grid-cols-3'>
+					<div className='grid grid-cols-1 md:grid-cols-3 gap-3'>
 						<div>
 							<img className='rounded h-52 object-cover cursor-pointer transition-all duration-300 hover:scale-105' src="https://i.pinimg.com/474x/b9/37/9a/b9379ad46b7f2d23fc893714558d6f93.jpg" alt="NA" width={200} />
 						</div>
