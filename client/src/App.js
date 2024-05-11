@@ -8,7 +8,6 @@ import SignIn from './components/SignIn';
 import About from './components/About';
 import Services from './components/Services';
 import CustomerDash from './components/Dashboards/CustomerDash';
-import Footer from './components/Footer';
 export const BankContext = createContext();
 
 function App() {
@@ -29,7 +28,6 @@ function App() {
 					<Route path='/customer_dashboard/*' element={<CustomerDash></CustomerDash>}></Route>
 					<Route path='/services' element={<Services></Services>}></Route>
 				</Routes>
-				<Footer></Footer>
 			</BankContext.Provider>
 		</div>
 	);

@@ -1,9 +1,10 @@
 import React from 'react';
+import Footer from './Footer';
 
 function Services() {
     return (
         <div className=''>
-            <div className='container grid grid-cols-1 md:grid-cols-3 gap-5'>
+            <div className='container grid grid-cols-1 md:grid-cols-3 gap-5 mb-5'>
                 <div>
                     <h2 className='text-4xl font-bold text-green-400 my-3'>Personal Banking</h2>
                     <h3 className='tracking-wide'>What are your financial aspirations?</h3>
@@ -41,6 +42,7 @@ function Services() {
                     <p className='tracking-wide'>GO Bank provides its customers flexibility of doing their Foreign exchange conversions to be delivered immediately or up to a maximum of 2 working days to give them convenience in settlement</p>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     )
 };
