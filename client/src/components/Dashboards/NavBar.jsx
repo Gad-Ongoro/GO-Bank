@@ -4,7 +4,7 @@ import { FiEdit3 } from "react-icons/fi";
 
 function NavBar() {
 	return (
-		<div>
+		<div className="hidden md:block">
 			<div className='container flex flex-col md:flex-row justify-center items-center md:justify-between text-center gap-3'>
 				<div className="flex gap-3">
 					<div className="relative">

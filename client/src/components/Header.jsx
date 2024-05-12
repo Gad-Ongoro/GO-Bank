@@ -21,7 +21,7 @@ function Header() {
 						<h1 className='text-2xl font-bold mt-1 p-0 text-green-500 text-center'>GO Bank</h1>
 					</NavLink>
 				</div>
-				<div className='nav_holder flex'>
+				<div className='nav_holder flex justify-center'>
 					<div className='m-2'>
 						<ul className='d-flex list-none'>
 							<li className='navlink'>

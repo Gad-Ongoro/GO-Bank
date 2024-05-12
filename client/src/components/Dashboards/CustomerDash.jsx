@@ -10,7 +10,7 @@ function CustomerDash() {
 			<div className='sticky top-10 col-start-2 col-end-13 backdrop-blur'>
 				<NavBar></NavBar>
 			</div>
-			<div className='row-start-2 row-end-13'>
+			<div className='fixed top-1/2 -translate-y-1/2 row-start-2 row-end-13'>
 				<SideNav></SideNav>
 			</div>
 			<div className='row-start-2 row-end-13 col-start-2 col-end-13'>
