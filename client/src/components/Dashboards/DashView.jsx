@@ -1,5 +1,8 @@
 import React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
+import { FaArrowRightLong } from "react-icons/fa6";
+import InstallMobileIcon from '@mui/icons-material/InstallMobile';
+import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 
 function DashView() {
     return (
@@ -40,9 +43,30 @@ function DashView() {
 				</div>
 			</div>
 
-			<div>
+			<div className='col-span-12 md:col-span-4 text-center'>
 				<div>
 					<h2 className='text-lg'>My Cards</h2>
+				</div>
+
+				<div className='flex justify-around'>
+					<div>
+						<h2 className='text-lg'>Total Balance</h2>
+						
+						<button className='bg-green-500 hover:bg-green-400 transition-all duration-500 w-36 h-10 text-white-500 font-bold rounded-full'>Transfer <CompareArrowsIcon className='inline ml-1' /></button>
+					</div>
+					<div>
+						<p>$5,060.99</p>
+						<button className='bg-green-500 hover:bg-green-400 transition-all duration-500 w-36 h-10 text-white-500 font-bold rounded-full'>Withdraw <InstallMobileIcon  className='inline ml-1' /></button>
+					</div>
+				</div>
+				<div>
+
+				</div>
+				<div>
+
+				</div>
+				<div>
+					<button className='bg-green-500 hover:bg-green-400 transition-all duration-500 w-36 h-10 text-white-500 font-bold rounded-full'>Show All <FaArrowRightLong className='inline ml-1' /></button>
 				</div>
 			</div>
 		</div>
