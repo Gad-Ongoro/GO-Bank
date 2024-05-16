@@ -3,6 +3,10 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import { FaArrowRightLong } from "react-icons/fa6";
 import InstallMobileIcon from '@mui/icons-material/InstallMobile';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
+import { RxHamburgerMenu } from "react-icons/rx";
+import { CiEdit } from "react-icons/ci";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { TiStarOutline } from "react-icons/ti";
 
 function DashView() {
     return (
@@ -43,9 +47,12 @@ function DashView() {
 				</div>
 			</div>
 
-			<div className='col-span-12 md:col-span-4 text-center'>
+			<div className='col-span-12 md:col-span-4 text-center bg-gray-800 rounded-xl mt-5'>
 				<div>
-					<h2 className='text-lg'>My Cards</h2>
+					<div>
+						<h2 className='text-green-500 text-lg'>My Cards</h2>
+						<p>4 Active Cards</p>
+					</div>
 				</div>
 
 				<div className='flex justify-around'>
@@ -59,13 +66,37 @@ function DashView() {
 						<button className='bg-green-500 hover:bg-green-400 transition-all duration-500 w-36 h-10 text-white-500 font-bold rounded-full'>Withdraw <InstallMobileIcon  className='inline ml-1' /></button>
 					</div>
 				</div>
-				<div>
-
+				<div className='grid grid-cols-12 items-center mt-2'>
+					<div className='col-start-1 col-end-2 flex justify-center'>
+						<RxHamburgerMenu className='text-xl transition-all duration-500 hover:cursor-pointer hover:text-green-300' />
+					</div>
+					<div className='col-start-2 col-end-11'>
+						<img src="https://i.pinimg.com/474x/13/8a/b4/138ab4f0cef7ed70d580d0248f4b1ab4.jpg" className='rounded' alt="NA" />
+					</div>
+					<div className='col-start-11 col-end-13'>
+						<div className='flex flex-col justify-between items-center'>
+							<CiEdit className='my-2 text-2xl transition-all duration-500 hover:cursor-pointer hover:text-green-300' />
+							<RiDeleteBin5Line className='my-2 text-orange-700 text-2xl transition-all duration-300 hover:cursor-pointer hover:text-orange-600' />
+							<TiStarOutline className='my-2 text-2xl transition-all duration-500 hover:cursor-pointer hover:text-green-300' />
+						</div>
+					</div>
 				</div>
-				<div>
-
+				<div className='grid grid-cols-12 items-center mt-2'>
+					<div className='col-start-1 col-end-2 flex justify-center'>
+						<RxHamburgerMenu className='text-xl transition-all duration-500 hover:cursor-pointer hover:text-green-300' />
+					</div>
+					<div className='col-start-2 col-end-11'>
+						<img src="https://i.pinimg.com/564x/e6/eb/56/e6eb563a0af57973d37e2c2e42b69e6a.jpg" className='rounded' alt="NA" />
+					</div>
+					<div className='col-start-11 col-end-13'>
+						<div className='flex flex-col justify-between items-center'>
+							<CiEdit className='my-2 text-2xl transition-all duration-500 hover:cursor-pointer hover:text-green-300' />
+							<RiDeleteBin5Line className='my-2 text-orange-700 text-2xl transition-all duration-300 hover:cursor-pointer hover:text-orange-600' />
+							<TiStarOutline className='my-2 text-2xl transition-all duration-500 hover:cursor-pointer hover:text-green-300' />
+						</div>
+					</div>
 				</div>
-				<div>
+				<div className='flex justify-center mt-2'>
 					<button className='bg-green-500 hover:bg-green-400 transition-all duration-500 w-36 h-10 text-white-500 font-bold rounded-full'>Show All <FaArrowRightLong className='inline ml-1' /></button>
 				</div>
 			</div>
