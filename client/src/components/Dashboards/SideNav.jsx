@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { SnackbarProvider, enqueueSnackbar } from 'notistack';
 import { TbSmartHome } from "react-icons/tb";
-// import { IconContext } from 'react-icons/lib';
 import { CgProfile } from "react-icons/cg";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
@@ -24,8 +24,17 @@ function SideNav() {
 			</NavLink>
 			<IoNotificationsOutline className='transition-all duration-400 cursor-pointer hover:text-green-500' size={30} />
 			<MdOutlineFavoriteBorder className='transition-all duration-400 cursor-pointer hover:text-green-500' size={30} />
-			<RiSettings3Line className='transition-all duration-400 cursor-pointer hover:text-green-500' size={30} />
-			<TbLogout2 className='transition-all duration-400 cursor-pointer hover:text-green-500' size={30} />
+			<NavLink to={'/customer_dashboard/settings'}>
+				<RiSettings3Line className='transition-all duration-400 cursor-pointer hover:text-green-500' size={30} />
+			</NavLink>
+
+			<SnackbarProvider />
+			
+			<TbLogout2 
+				onClick={() => enqueueSnackbar('Logged out successfully', { variant: 'success' })} 
+				className='transition-all duration-400 cursor-pointer hover:text-green-500' 
+				size={30} 
+			/>
 		</div>
 	)
 }
