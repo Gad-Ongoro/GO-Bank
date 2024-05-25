@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import { SnackbarProvider, enqueueSnackbar } from 'notistack';
 import { TbSmartHome } from "react-icons/tb";
@@ -28,7 +28,7 @@ function SideNav() {
 				<RiSettings3Line className='transition-all duration-400 cursor-pointer hover:text-green-500' size={30} />
 			</NavLink>
 
-			<SnackbarProvider />
+			<SnackbarProvider anchorOrigin={{ vertical: 'top', horizontal: 'left' }} />
 			
 			<TbLogout2 
 				onClick={() => enqueueSnackbar('Logged out successfully', { variant: 'success' })} 
