@@ -1,8 +1,10 @@
 import React from 'react';
+import AnimatedYPage from './AnimatedYPage';
 import Footer from './Footer';
 
 function Services() {
     return (
+        <AnimatedYPage>
         <div className=''>
             <div className='container grid grid-cols-1 md:grid-cols-3 gap-5 mb-5'>
                 <div>
@@ -44,6 +46,7 @@ function Services() {
             </div>
             <Footer></Footer>
         </div>
+        </AnimatedYPage>
     )
 };
 

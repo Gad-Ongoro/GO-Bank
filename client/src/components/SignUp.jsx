@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import api from '../api';
+import AnimatedYPage from './AnimatedYPage';
 import { BiHide } from "react-icons/bi";
 import { BiShowAlt } from "react-icons/bi";
 
@@ -98,6 +99,7 @@ function SignUp() {
     };
 
 	return (
+		<AnimatedYPage>
 		<div className=''>
 			<div className='h-screen'>
 				<div className='text-center'>
@@ -154,6 +156,7 @@ function SignUp() {
 				</form>
 			</div>
 		</div>
+		</AnimatedYPage>
 	)
 };
 

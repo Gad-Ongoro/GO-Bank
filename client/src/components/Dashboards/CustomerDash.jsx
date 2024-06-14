@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import AnimatedYPage from '../AnimatedYPage';
 import SideNav from './SideNav';
 import NavBar from './NavBar';
 import DashView from './DashView';
@@ -7,6 +8,7 @@ import Settings from './Settings';
 
 function CustomerDash() {
 	return (
+		<AnimatedYPage>
 		<div className='container h-screen grid grid-cols-12'>
 			<div className='sticky top-10 col-start-2 col-end-13 backdrop-blur'>
 				<NavBar></NavBar>
@@ -21,6 +23,7 @@ function CustomerDash() {
 				</Routes>
 			</div>
 		</div>
+		</AnimatedYPage>
 	)
 }
 

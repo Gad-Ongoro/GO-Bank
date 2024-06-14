@@ -4,6 +4,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants';
 import api from '../api';
 import { BankContext } from '../App';
+import AnimatedYPage from './AnimatedYPage';
 
 function SignIn() {
 	let [signInData, setSignInData] = useState({});
@@ -58,6 +59,7 @@ function SignIn() {
 
 
 	return (
+		<AnimatedYPage>
 		<div className=''>
 			<div className='h-screen'>
 				<div className='text-center'>
@@ -97,6 +99,7 @@ function SignIn() {
 				</form>
 			</div>
 		</div>
+		</AnimatedYPage>
 	)
 }
 
