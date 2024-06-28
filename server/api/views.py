@@ -17,6 +17,7 @@ class CustomUser_ListCreateView(generics.ListCreateAPIView):
 class CustomUser_DetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.CustomUser.objects.all()
     serializer_class = serializers.CustomUserSerializer
+    permission_classes = [IsAuthenticated]
     
 """ PROFILES """
 class Profile_ListCreateAPIView(generics.ListCreateAPIView):
@@ -26,6 +27,7 @@ class Profile_ListCreateAPIView(generics.ListCreateAPIView):
 class Profile_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Profile.objects.all()
     serializer_class = serializers.ProfileSerializer
+    permission_classes = [IsAuthenticated]
     
 """ ADDRESSES """
 class Address_ListCreateAPIView(generics.ListCreateAPIView):
@@ -35,6 +37,7 @@ class Address_ListCreateAPIView(generics.ListCreateAPIView):
 class Address_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Address.objects.all()
     serializer_class = serializers.AddressSerializer
+    permission_classes = [IsAuthenticated]
     
 """ BENEFICIARIES """
 class Beneficiary_ListCreateAPIView(generics.ListCreateAPIView):
@@ -44,6 +47,7 @@ class Beneficiary_ListCreateAPIView(generics.ListCreateAPIView):
 class Beneficiary_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Beneficiary.objects.all()
     serializer_class = serializers.BeneficiarySerializer
+    permission_classes = [IsAuthenticated]
     
 """ BANK_ACCOUNTS """
 class Bank_Account_ListCreateAPIView(generics.ListCreateAPIView):
@@ -53,6 +57,7 @@ class Bank_Account_ListCreateAPIView(generics.ListCreateAPIView):
 class Bank_Account_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Bank_Account.objects.all()
     serializer_class = serializers.BankAccountSerializer
+    permission_classes = [IsAuthenticated]
     
 """ TRANSACTIONS """
 class Transaction_ListCreateAPIView(generics.ListCreateAPIView):
@@ -62,6 +67,7 @@ class Transaction_ListCreateAPIView(generics.ListCreateAPIView):
 class Transaction_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Transaction.objects.all()
     serializer_class = serializers.TransactionSerializer
+    permission_classes = [IsAuthenticated]
     
 """ CARDS """
 class Card_ListCreateAPIView(generics.ListCreateAPIView):
@@ -71,6 +77,7 @@ class Card_ListCreateAPIView(generics.ListCreateAPIView):
 class Card_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Card.objects.all()
     serializer_class = serializers.CardSerializer
+    permission_classes = [IsAuthenticated]
 
 """ LOANS """
 class Loan_ListAPIView(generics.ListAPIView):
@@ -96,6 +103,7 @@ class Loan_CreateAPIView(generics.CreateAPIView):
 class Loan_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Loan.objects.all()
     serializer_class = serializers.LoanSerializer
+    permission_classes = [IsAuthenticated]
     
 """ LOAN_PAYMENTS """
 class Loan_Payment_ListCreateAPIView(generics.ListCreateAPIView):
@@ -105,6 +113,7 @@ class Loan_Payment_ListCreateAPIView(generics.ListCreateAPIView):
 class Loan_Payment_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Loan_Payment.objects.all()
     serializer_class = serializers.LoanPaymentSerializer
+    permission_classes = [IsAuthenticated]
     
 """ BRANCHES """
 class Branch_ListCreateAPIView(generics.ListCreateAPIView):
@@ -114,6 +123,7 @@ class Branch_ListCreateAPIView(generics.ListCreateAPIView):
 class Branch_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Branch.objects.all()
     serializer_class = serializers.BranchSerializer
+    permission_classes = [IsAuthenticated]
     
 """ EMPLOYEES """
 class Employee_ListCreateAPIView(generics.ListCreateAPIView):
@@ -123,3 +133,4 @@ class Employee_ListCreateAPIView(generics.ListCreateAPIView):
 class Employee_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Employee.objects.all()
     serializer_class = serializers.EmployeeSerializer
+    permission_classes = [IsAuthenticated]

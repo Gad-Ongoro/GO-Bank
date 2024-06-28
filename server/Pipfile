@@ -23,6 +23,7 @@ sqlparse = "*"
 django-cors-headers = "*"
 django-environ = "*"
 tzdata = "*"
+dj-database-url = "*"
 
 [dev-packages]
 
