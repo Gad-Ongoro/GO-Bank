@@ -1,5 +1,4 @@
 # GOBank
-# GOBank
 
 GOBank is a banking application that provides seamless banking and investment services to users. It is built with Django for the backend API and React for the frontend. GOBank allows users to manage their accounts, view transactions, and perform various banking and investment operations seamlessly.
 
