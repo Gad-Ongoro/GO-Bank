@@ -9,6 +9,7 @@ import About from './components/About';
 import Services from './components/Services';
 import CustomerDash from './components/Dashboards/CustomerDash';
 export const BankContext = createContext();
+import { AppContextProvider } from './services/utils';
 
 function App() {
 	const access_token = localStorage.getItem('access');
@@ -16,20 +17,22 @@ function App() {
 	let [signedIn, setSignedIn] = useState(false);
 
 	return (
-		<div className=''>
-			<BankContext.Provider value={{access_token, token_exists, setSignedIn}}>
-				<Header></Header>
-				<Routes>
-					<Route path='/' element={<Main></Main>}></Route>
-					<Route path='/home' element={<Main></Main>}></Route>
-					<Route path='/register' element={<SignUp></SignUp>}></Route>
-					<Route path='/signin' element={<SignIn></SignIn>}></Route>
-					<Route path='/about' element={<About></About>}></Route>
-					<Route path='/customer_dashboard/*' element={<CustomerDash></CustomerDash>}></Route>
-					<Route path='/services' element={<Services></Services>}></Route>
-				</Routes>
-			</BankContext.Provider>
-		</div>
+		<>
+			<AppContextProvider>
+				<BankContext.Provider value={{access_token, token_exists, setSignedIn}}>
+					<Header></Header>
+					<Routes>
+						<Route path='/' element={<Main></Main>}></Route>
+						<Route path='/home' element={<Main></Main>}></Route>
+						<Route path='/register' element={<SignUp></SignUp>}></Route>
+						<Route path='/signin' element={<SignIn></SignIn>}></Route>
+						<Route path='/about' element={<About></About>}></Route>
+						<Route path='/customer_dashboard/*' element={<CustomerDash></CustomerDash>}></Route>
+						<Route path='/services' element={<Services></Services>}></Route>
+					</Routes>
+				</BankContext.Provider>
+			</AppContextProvider>
+		</>
 	);
 };
 

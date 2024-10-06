@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import AnimatedYPage from './AnimatedYPage';
 import Footer from './Footer';
 
@@ -16,11 +17,11 @@ function Main() {
 									<p className='text-lg my-2'>We are your partner. We share your vision. Go Above! Go Beyond!</p>
 								</div>
 								<div>
-									<button
-										type='button'
+									<NavLink
+										to='/register'
 										className='bg-green-500 hover:bg-green-400 transition-all duration-500 w-36 h-10 text-dark font-bold rounded-pill'>
 										Get Started
-									</button>
+									</NavLink>
 								</div>
 							</div>
 

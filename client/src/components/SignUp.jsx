@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
-import api from '../api';
+import api from '../services/api';
 import AnimatedYPage from './AnimatedYPage';
 import { BiHide } from "react-icons/bi";
 import { BiShowAlt } from "react-icons/bi";
@@ -100,64 +100,52 @@ function SignUp() {
 
 	return (
 		<AnimatedYPage>
-		<div className=''>
-			<div className='h-screen'>
-				<div className='text-center'>
-					<h2 className='text-green-500 text-2xl mb-4'>Let's get you started</h2>
+			<div className=''>
+				<div className='h-screen'>
+					<div className='text-center'>
+						<h2 className='text-green-500 text-2xl mb-4'>Let's get you started</h2>
+					</div>
+					<form onSubmit={handleSubmit} className='w-full flex flex-column justify-center align-center items-center'>
+						<div className="form-floating mb-2 w-10/12 md:w-1/2">
+							<input type="text" className="form-control" id="username" placeholder="Enter username" name="username" onChange={handleInputChange} required></input>
+							<label htmlFor="username">Username</label>
+						</div>
+						<div className="form-floating mb-3 mt-2 w-10/12 md:w-1/2">
+							<input type="text" className="form-control" id="email" placeholder="Enter email" name="email" onChange={handleInputChange} required></input>
+							<label htmlFor="email">Email</label>
+						</div>
+
+						<div className="form-floating w-10/12 md:w-1/2 mt-3 mb-2">
+							<select className="form-select" id="sel2" name="primary_branch" defaultValue={branches[0] !== undefined && branches[0].branch_id} onChange={handleInputChange} required>
+								<option>Select One</option>
+								{branchInputs}
+							</select>
+							<label htmlFor="sel2" className="form-label">Select Primary Branch:</label>
+						</div>
+
+						<div className="form-floating mb-2 mt-3 w-10/12 md:w-1/2 relative">
+							<input type="password" ref={password_input} className="form-control password_input" id="password1" placeholder="Enter password" name="password" onChange={handleInputChange} required></input>
+							<label htmlFor="password1">Password</label>
+							{showPassword ? <BiShowAlt className='cursor-pointer text-green-500 absolute top-1/3 right-2' size={30} onClick={toggle_show_password} /> : <BiHide className='cursor-pointer text-green-500 absolute top-1/3 right-2' size={30} onClick={toggle_show_password} />}
+						</div>
+
+						<div className="form-floating mb-3 mt-2 w-10/12 md:w-1/2">
+							<input type="password" ref={password_input2} className="form-control password_input" id="password2" placeholder="Enter password" name="password" onChange={handleInputChange} required></input>
+							<label htmlFor="password2">Confirm Password</label>
+							{showPassword2 ? <BiShowAlt className='cursor-pointer text-green-500 absolute top-1/3 right-2' size={30} onClick={toggle_show_password2} /> : <BiHide className='cursor-pointer text-green-500 absolute top-1/3 right-2' size={30} onClick={toggle_show_password2} />}
+						</div>
+
+						<input 
+							type="submit" 
+							className='h-10 mt-3 w-3/4 md:w-1/3 bg-green-400 text-white text-lg font-bold rounded'
+							value={"Register"}>
+						</input>
+						<p className='text-white mb-3 text-lg'>Already have an account ? <span className='text-green-500'><NavLink to={'/signin'} className='ml-1' onClick={scrollToTop}>Log In</NavLink></span> </p>
+					</form>
 				</div>
-				<form onSubmit={handleSubmit} className='w-full flex flex-column justify-center align-center items-center'>
-					<div className="form-floating mb-2 w-10/12 md:w-1/2">
-						<input type="text" className="form-control" id="username" placeholder="Enter username" name="username" onChange={handleInputChange}></input>
-						<label htmlFor="username">Username</label>
-					</div>
-					<div className="form-floating mb-3 mt-2 w-10/12 md:w-1/2">
-						<input type="text" className="form-control" id="email" placeholder="Enter email" name="email" onChange={handleInputChange}></input>
-						<label htmlFor="email">Email</label>
-					</div>
-
-					{/* Role */}
-					<div className="form-floating w-10/12 md:w-1/2">
-						<select className="form-select" id="sel1" defaultValue={10} name="role" onChange={handleInputChange}>
-							<option>Select One</option>
-							<option value={10}>Customer</option>
-							<option value={1000}>Administrator</option>
-							<option value={1000}>Employee</option>
-							<option value={10000}>Super Administrator</option>
-						</select>
-						<label htmlFor="sel1" className="form-label">User Type:</label>
-					</div>
-
-					<div className="form-floating w-10/12 md:w-1/2 mt-3 mb-2">
-						<select className="form-select" id="sel2" name="primary_branch" defaultValue={branches[0] !== undefined && branches[0].branch_id} onChange={handleInputChange}>
-							<option>Select One</option>
-							{branchInputs}
-						</select>
-						<label htmlFor="sel2" className="form-label">Select Primary Branch:</label>
-					</div>
-
-					<div className="form-floating mb-2 mt-3 w-10/12 md:w-1/2 relative">
-						<input type="password" ref={password_input} className="form-control password_input" id="password1" placeholder="Enter password" name="password" onChange={handleInputChange}></input>
-						<label htmlFor="password1">Password</label>
-						{showPassword ? <BiShowAlt className='cursor-pointer text-green-500 absolute top-1/3 right-2' size={30} onClick={toggle_show_password} /> : <BiHide className='cursor-pointer text-green-500 absolute top-1/3 right-2' size={30} onClick={toggle_show_password} />}
-					</div>
-
-					<div className="form-floating mb-3 mt-2 w-10/12 md:w-1/2">
-						<input type="password" ref={password_input2} className="form-control password_input" id="password2" placeholder="Enter password" name="password" onChange={handleInputChange}></input>
-						<label htmlFor="password2">Confirm Password</label>
-						{showPassword2 ? <BiShowAlt className='cursor-pointer text-green-500 absolute top-1/3 right-2' size={30} onClick={toggle_show_password2} /> : <BiHide className='cursor-pointer text-green-500 absolute top-1/3 right-2' size={30} onClick={toggle_show_password2} />}
-					</div>
-
-					<input 
-						type="submit" 
-						className='h-10 mt-3 w-3/4 md:w-1/3 bg-green-400 text-white text-lg font-bold rounded'
-						value={"Register"}>
-					</input>
-					<p className='text-white mb-3 text-lg'>Already have an account ? <span className='text-green-500'><NavLink to={'/signin'} className='ml-1' onClick={scrollToTop}>Log In</NavLink></span> </p>
-				</form>
 			</div>
-		</div>
 		</AnimatedYPage>
 	)
-};
+}
 
 export default SignUp;
