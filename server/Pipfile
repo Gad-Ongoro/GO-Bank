@@ -24,6 +24,7 @@ django-cors-headers = "*"
 django-environ = "*"
 tzdata = "*"
 dj-database-url = "*"
+whitenoise = "*"
 
 [dev-packages]
 

@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics, status
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework import permissions
 from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
 from . import models
 from . import serializers
 from datetime import datetime, timedelta
@@ -9,15 +10,35 @@ from django.urls import reverse_lazy
 
 # Create your views here.
 """ USERS """
-class CustomUser_ListCreateView(generics.ListCreateAPIView):
-    queryset = models.CustomUser.objects.all()
+# Register
+class UserCreateView(generics.CreateAPIView):
+    queryset = models.User.objects.all()
     serializer_class = serializers.CustomUserSerializer
-    permission_classes = [AllowAny]
-    
+    permission_classes = [permissions.AllowAny]
+
+# Logout
+class LogoutView(generics.GenericAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response({"message": "Token blacklisted successfully."}, status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+class UserListView(generics.ListAPIView):
+    queryset = models.User.objects.all()
+    serializer_class = serializers.CustomUserSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
 class CustomUser_DetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.CustomUser.objects.all()
+    queryset = models.User.objects.all()
     serializer_class = serializers.CustomUserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     
 """ PROFILES """
 class Profile_ListCreateAPIView(generics.ListCreateAPIView):
@@ -27,7 +48,7 @@ class Profile_ListCreateAPIView(generics.ListCreateAPIView):
 class Profile_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Profile.objects.all()
     serializer_class = serializers.ProfileSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     
 """ ADDRESSES """
 class Address_ListCreateAPIView(generics.ListCreateAPIView):
@@ -37,7 +58,7 @@ class Address_ListCreateAPIView(generics.ListCreateAPIView):
 class Address_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Address.objects.all()
     serializer_class = serializers.AddressSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     
 """ BENEFICIARIES """
 class Beneficiary_ListCreateAPIView(generics.ListCreateAPIView):
@@ -47,7 +68,7 @@ class Beneficiary_ListCreateAPIView(generics.ListCreateAPIView):
 class Beneficiary_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Beneficiary.objects.all()
     serializer_class = serializers.BeneficiarySerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     
 """ BANK_ACCOUNTS """
 class Bank_Account_ListCreateAPIView(generics.ListCreateAPIView):
@@ -57,7 +78,7 @@ class Bank_Account_ListCreateAPIView(generics.ListCreateAPIView):
 class Bank_Account_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Bank_Account.objects.all()
     serializer_class = serializers.BankAccountSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     
 """ TRANSACTIONS """
 class Transaction_ListCreateAPIView(generics.ListCreateAPIView):
@@ -67,7 +88,7 @@ class Transaction_ListCreateAPIView(generics.ListCreateAPIView):
 class Transaction_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Transaction.objects.all()
     serializer_class = serializers.TransactionSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     
 """ CARDS """
 class Card_ListCreateAPIView(generics.ListCreateAPIView):
@@ -77,7 +98,7 @@ class Card_ListCreateAPIView(generics.ListCreateAPIView):
 class Card_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Card.objects.all()
     serializer_class = serializers.CardSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
 """ LOANS """
 class Loan_ListAPIView(generics.ListAPIView):
@@ -103,7 +124,7 @@ class Loan_CreateAPIView(generics.CreateAPIView):
 class Loan_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Loan.objects.all()
     serializer_class = serializers.LoanSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     
 """ LOAN_PAYMENTS """
 class Loan_Payment_ListCreateAPIView(generics.ListCreateAPIView):
@@ -113,7 +134,7 @@ class Loan_Payment_ListCreateAPIView(generics.ListCreateAPIView):
 class Loan_Payment_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Loan_Payment.objects.all()
     serializer_class = serializers.LoanPaymentSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     
 """ BRANCHES """
 class Branch_ListCreateAPIView(generics.ListCreateAPIView):
@@ -123,14 +144,4 @@ class Branch_ListCreateAPIView(generics.ListCreateAPIView):
 class Branch_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Branch.objects.all()
     serializer_class = serializers.BranchSerializer
-    permission_classes = [IsAuthenticated]
-    
-""" EMPLOYEES """
-class Employee_ListCreateAPIView(generics.ListCreateAPIView):
-    queryset = models.Employee.objects.all()
-    serializer_class = serializers.EmployeeSerializer
-    
-class Employee_Detail_APIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.Employee.objects.all()
-    serializer_class = serializers.EmployeeSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]

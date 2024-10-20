@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from django.core.mail import send_mail
 from . import models
 
 class BranchSerializer(serializers.ModelSerializer):
@@ -7,59 +6,29 @@ class BranchSerializer(serializers.ModelSerializer):
         model = models.Branch
         fields = '__all__'
 
-class EmployeeSerializer(serializers.ModelSerializer):
-    branch = BranchSerializer()
-    class Meta:
-        model = models.Employee
-        fields = '__all__'
-        
 class CustomUserSerializer(serializers.ModelSerializer):
-    # primary_branch = BranchSerializer()
 
     class Meta:
-        model = models.CustomUser
-        fields = ['id', 'username', 'email', 'role', 'password', 'created_at', 'updated_at', 'primary_branch']
+        model = models.User
+        fields = ['id', 'first_name', 'last_name', 'email', 'role', 'password', 'date_joined', 'updated_at', 'primary_branch']
         extra_kwargs = {
             'password': {'write_only': True},
+            # 'role': {'read_only': True},
+            'date_joined': {'read_only': True},
         }
-        
-    # def create(self, validated_data):
-    #     primary_branch_data = validated_data.pop('primary_branch')
-    #     primary_branch = models.Branch.objects.create(**primary_branch_data)
-    #     user = models.CustomUser.objects.create(primary_branch=primary_branch, **validated_data)
-    #     return user
 
     def create(self, validated_data):
-        print(validated_data)
-        user = models.CustomUser.objects.create_user(**validated_data)
-        self.email_user(user)
+        user = models.User.objects.create_user(**validated_data)
         return user
-    
-    subject = 'Verify Your Email'
-    from_email = 'gadongoro1@fastmail.com'
-    message = 'Please click the link below to verify your email:\n\nhttp://your-domain.com/verify-email/?token=your_verification_token'
-        
-    def email_user(self, user):
-        """Send an email to this user."""
-        send_mail(self.subject, self.message, self.from_email, [user.email], fail_silently=False)
 
     def update(self, instance, validated_data):
-        primary_branch_data = validated_data.pop('primary_branch', None)
-        if primary_branch_data:
-            primary_branch = instance.primary_branch
-            for key, value in primary_branch_data.items():
-                setattr(primary_branch, key, value)
-            primary_branch.save()
+        password = validated_data.pop('password', None)
+        if password:
+            instance.set_password(password)
         for key, value in validated_data.items():
             setattr(instance, key, value)
         instance.save()
         return instance
-
-# class UserSerializer(serializers.ModelSerializer):
-#     # primary_branch = BranchSerializer()
-#     class Meta:
-#         model = models.User
-#         fields = '__all__'
         
 class ProfileSerializer(serializers.ModelSerializer):
     # user = UserSerializer()

@@ -1,14 +1,13 @@
 from django.urls import path, include
 from . import views
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
 
 urlpatterns = [
     # User
-    path('users/', views.CustomUser_ListCreateView.as_view(), name='users_list_create'),
+    path('users/register/', views.UserCreateView.as_view(), name='users_register'),
+    path('users/', views.UserListView.as_view(), name='users_list'),
     path('users/<uuid:pk>/', views.CustomUser_DetailView.as_view(), name='user_detail'),
+    
+    path('logout/', views.LogoutView.as_view(), name='logout'),
 
     # Profile
     path('profiles/', views.Profile_ListCreateAPIView.as_view(), name='profiles_list'),
@@ -46,13 +45,4 @@ urlpatterns = [
     # Branches
     path('branches/', views.Branch_ListCreateAPIView.as_view(), name="card_list"),
     path('branches/<uuid:pk>/', views.Branch_Detail_APIView.as_view(), name='card_detail'),
-    
-    # Employees
-    path('employees/', views.Employee_ListCreateAPIView.as_view(), name="card_list"),
-    path('employees/<uuid:pk>/', views.Employee_Detail_APIView.as_view(), name='card_detail'),
-    
-    # JWT
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api-auth/', include('rest_framework.urls')),
 ]

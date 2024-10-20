@@ -2,6 +2,7 @@ import argparse
 from django.core.management.base import BaseCommand
 from django.contrib.auth.hashers import make_password
 from faker import Faker
+import random
 from random import choice as rc, randint as ri
 from api import models
 from datetime import datetime, timedelta
@@ -30,7 +31,7 @@ class Command(BaseCommand):
         # models.Address.objects.all().delete()
         # models.Profile.objects.all().delete()
         models.Branch.objects.all().delete()
-        models.CustomUser.objects.all().delete()
+        models.User.objects.all().delete()
         
     def seed_data(self, num_records):
         # Branches
@@ -38,28 +39,22 @@ class Command(BaseCommand):
         # for branch in branches:
         for _ in range(num_records):
             branch_instance  = models.Branch(
-                name = f"{rc(branches)} GO_Bank Branch",
+                name = f"{rc(branches)} GOBank Branch",
                 location = rc(branches),
+                longitude = fake.longitude(),
+                latitude = fake.latitude(),
                 opening_hours = '08:00',
                 closing_hours = '16:00',
                 open_days = 'Monday - Saturday'
             )
             branch_instance.save()
-            
-        # Employees
-        for branch in models.Branch.objects.all():
-            employee_instance = models.Employee(
-                first_name = fake.first_name(),
-                last_name = fake.last_name(),
-                email = fake.email(),
-                branch = branch
-            )
-            employee_instance.save()
+
  
         # User
         for branch in models.Branch.objects.all():
-            user_instance = models.CustomUser(
-                username = fake.user_name(), 
+            user_instance = models.User(
+                first_name = fake.first_name(),
+                last_name = fake.last_name(),
                 email = fake.email(),
                 role = rc([10, 100, 1000]),
                 password = make_password(fake.password()),
@@ -68,10 +63,8 @@ class Command(BaseCommand):
             user_instance.save()
 
         # Profile
-        for user in models.CustomUser.objects.all():
+        for user in models.User.objects.all():
             profile_instance = models.Profile(
-                first_name = fake.first_name(),
-                last_name = fake.last_name(),
                 date_of_birth = fake.date_of_birth(),
                 gender = rc(['Male', 'Female']),
                 phone_number = fake.phone_number(),
@@ -85,7 +78,7 @@ class Command(BaseCommand):
             profile_instance.save()
             
         # Address
-        for user in models.CustomUser.objects.all():
+        for user in models.User.objects.all():
             address_instance = models.Address(
                 street = fake.street_name(),
                 city = fake.city(),
@@ -106,7 +99,7 @@ class Command(BaseCommand):
             user_instance.save()
 
         # Bank_Account
-        for user in models.CustomUser.objects.all():
+        for user in models.User.objects.all():
             bank_account_instance = models.Bank_Account(
                 account_type = rc(['Personal', 'Corporate', 'Savings', 'Joint', 'Retirement', 'Student']),
                 account_number = fake.credit_card_number(),
@@ -130,11 +123,12 @@ class Command(BaseCommand):
         for account in models.Bank_Account.objects.all():
             transaction_type = rc(['Deposit', 'Withdrawal', 'Transfer', 'Payment', 'Loan', 'Investment', 'Foreign Exchange', 'Cash Management', 'Trade Finance', 'Treasury Service'])
             transaction_instance = models.Transaction(
-                type = transaction_type,
+                transaction_type = transaction_type,
                 amount = ri(100, 500000),
-                description = transaction_type,
+                result_description = transaction_type,
                 bank_account = account,
-                beneficiary = rc([beneficiary for beneficiary in models.Beneficiary.objects.all()])
+                beneficiary = rc([beneficiary for beneficiary in models.Beneficiary.objects.all()]),
+                user = rc([user for user in models.User.objects.all()])
             )
             transaction_instance.save()
 
